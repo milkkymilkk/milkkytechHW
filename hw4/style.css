@@ -1,0 +1,88 @@
+*, *::before, *::after{
+  box-sizing: border-box;
+  font-family: Kanit;
+  font-weight: normal;
+  
+}
+body{
+  background-color:#e2e2e2;
+  
+}
+
+.whole{
+  width: fit-content;
+  height: fit-content;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #FBFBFB;;
+  border-radius: 6px;
+}
+.calculator-grid{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(4, 45px);
+  grid-template-rows: repeat(4, 45px);
+}
+.calculator-grid > button{
+  cursor: pointer;
+  font-size: 1.65rem;
+  border:6px solid #FBFBFB;;
+  outline: none;
+  background-color: #ECECEC;
+}
+.calculator-grid > button:hover{
+  background-color: rgba(25,25,255,.50);
+}
+
+.calculator-grid .bt{
+  border-radius: 100%;
+
+}
+.calculator-grid .del{
+  font-size: 1.125rem;
+  border-radius: 100%;
+  background-color: #F87328;
+  color: #FFFFFF;
+}
+.calculator-grid .plus{
+  border-radius: 100%;
+  background-color: #B6DAFB;
+}
+.calculator-grid .minus{
+  border-radius: 100%;
+  background-color: #FFC9C9;
+}
+.calculator-grid .multiply{
+  border-radius: 100%;
+  font-size: 1.12rem;
+  background-color: #CCFCC5;
+}
+.calculator-grid .divided{
+  border-radius: 100%;
+  background-color: #F9E2A6;
+}
+.calculator-grid .c{
+  font-size: 1.12rem;
+  border-radius: 100%;
+}
+
+.output{
+  grid-column: 1/-1;
+  background-color: #F1F1F1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 15px;
+  word-wrap:break-word;
+  word-break: break-all;
+}
+.output .previous-operand{
+  color: black;
+  font-size: 1.5rem;
+}
+.output .current-operand{
+  color: black;
+  font-size: 1rem;
+}
