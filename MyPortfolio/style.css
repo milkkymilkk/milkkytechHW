@@ -74,3 +74,13 @@ a:hover{
 .info{
   margin : 2%;
 }
+.clock{
+  margin: 2%;
+}
+
+.idk{
+  background-color: rgb(80, 80, 80);
+  color:  rgb(228, 228, 228);
+  padding: 5px;
+  width: auto;
+}
