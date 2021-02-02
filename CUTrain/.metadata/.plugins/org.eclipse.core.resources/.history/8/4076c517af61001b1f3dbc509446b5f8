@@ -1,0 +1,87 @@
+package com.cu.back.train.service.web;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cu.back.train.entity.web.Test;
+import com.cu.back.train.model.web.TestSearchModel;
+import com.cu.back.train.repository.core.CoreRepository;
+import com.cu.back.train.repository.core.SqlParams;
+import com.cu.back.train.repository.web.TestRepository;
+import com.cu.back.train.utils.CoreUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@Transactional
+public class TestService {
+
+	@Autowired
+	private CoreRepository coreRepository;
+
+	@Autowired
+	private TestRepository testRepository;
+
+	public List<TestSearchModel> getSearch(String name, String lastname) {
+		SqlParams params = SqlParams.create();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT id ");
+		sql.append(" 	 , name ");
+		sql.append(" 	 , lastname ");
+		sql.append(" 	 , email ");
+		sql.append(" FROM test ");
+		sql.append(" WHERE 1=1 ");
+
+		if (CoreUtils.isNotEmpty(name) && CoreUtils.isNotNull(name) && !"null".equals(name)) {
+			sql.append(" 	AND name LIKE '%'||:name||'%' ");
+		}
+		if (CoreUtils.isNotEmpty(lastname) && CoreUtils.isNotNull(lastname) && !"null".equals(lastname)) {
+			sql.append(" 	AND lastname LIKE '%'||:lastname||'%' ");
+		}
+
+		params.add("name", name);
+		params.add("lastname", lastname);
+
+		return coreRepository.getDataList(sql.toString(), params, TestSearchModel.class);
+	}
+
+	public Test searchDetail(Integer id) {
+		return testRepository.findById(id).get();
+	}
+
+	public Integer save(TestSearchModel data) {
+		Test test = new Test();
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(data, test);
+		return testRepository.saveAndFlush(test).getId();
+	}
+
+	public Integer update(TestSearchModel data) {
+		Test test = new Test();
+		ModelMapper modelMapper = new ModelMapper();
+		test = testRepository.findById(data.getId()).get();
+		modelMapper.map(data, test);
+		return testRepository.saveAndFlush(test).getId();
+	}
+
+	public void delete(Integer id) {
+		testRepository.deleteById(id);
+	}
+//
+//    public GridData getSecondary() {
+//        log.info("<--Start TestService.{}-->", "getSecondary()");
+//        SqlParams params = SqlParams.create();
+//        StringBuilder sql = new StringBuilder();
+//
+//        sql.append(" SELECT * ");
+//        sql.append(" FROM test ");
+//
+//        return coreRepository.searchGridData(sql.toString(), params);
+//    }
+
+}

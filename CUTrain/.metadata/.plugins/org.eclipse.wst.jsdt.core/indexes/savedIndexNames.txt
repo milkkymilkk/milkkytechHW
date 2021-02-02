@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+D:\01_Study\CUTrain\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3559586586.index
+3539502657.index
+2739125246.index
+2812722317.index
+2910781105.index

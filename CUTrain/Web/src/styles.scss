@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+label.require:after{
+    content: ' *';
+    color:red;
+    font-weight: bold;
+ }
+
+ @mixin invalid-border {
+    border-color: red;
+    &:focus,&.ng-select-opened > .ng-select-container, &.ng-select-focused:not(.ng-select-opened) > .ng-select-container{
+        border-color: red;
+        box-shadow: 0 0 0 rgba(red, .25);
+    }
+}
+
+:not(form).ng-invalid {
+    .validated &,
+    &.ng-dirty {
+        &,> .ng-select-container,> input:not(.ng-valid),> .custom-file > .custom-file-label
+        ,> .upload-container > .area {
+            @include invalid-border;
+            ~.invalid-feedback {
+                display: block;
+            }
+        }
+    }
+}
